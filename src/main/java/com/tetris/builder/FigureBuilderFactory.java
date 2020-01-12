@@ -1,5 +1,7 @@
 package com.tetris.builder;
 
+import com.tetris.database.GameData;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -10,11 +12,12 @@ public class FigureBuilderFactory {
 
     private final Map<BuilderType, FigureBuilder> figureBuildersByType;
 
-    public FigureBuilderFactory() {
+    public FigureBuilderFactory(GameData gameData) {
         Map<BuilderType, FigureBuilder> figureBuildersByType = new HashMap<>();
         figureBuildersByType.put(CLASSIC, new FigureClassicBuilder());
         figureBuildersByType.put(RANDOM, new FigureRandomBuilder());
         figureBuildersByType.put(TEST, new FigureTestBuilder());
+        figureBuildersByType.put(DB, new FigureDbBuilder(gameData));
         this.figureBuildersByType = Collections.unmodifiableMap(figureBuildersByType);
     }
 
@@ -26,6 +29,7 @@ public class FigureBuilderFactory {
     public enum BuilderType {
         CLASSIC,
         RANDOM,
-        TEST
+        TEST,
+        DB
     }
 }

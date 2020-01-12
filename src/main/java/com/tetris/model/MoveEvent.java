@@ -8,6 +8,10 @@ public class MoveEvent {
         this.type = type;
     }
 
+    @Override
+    public String toString() {
+        return  type.toString();
+    }
 
     public MoveEventType getType() {
         return type;

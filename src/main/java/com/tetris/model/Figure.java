@@ -21,6 +21,11 @@ public class Figure {
     private final Point pivot;
     private final Point currentCoordinateOnBoard;
 
+    public Figure(List<Point> points, Point pivot, Point currentCoordinateOnBoard) {
+        this.points = points;
+        this.pivot = pivot;
+        this.currentCoordinateOnBoard = currentCoordinateOnBoard;
+    }
 
     public Figure getNewFigureByMoveEventType(MoveEventType eventType) {
         return eventType == LEFT_ROTATE || eventType == RIGHT_ROTATE ? rotate(eventType) : move(eventType);
