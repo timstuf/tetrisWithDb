@@ -10,9 +10,8 @@ public class FigureRestoreBuilder extends AbstractFigureBuilder {
     private List<Figure> figures;
     private final FigureBuilder builder;
 
-    FigureRestoreBuilder(int gameId, FigureBuilder builder){
-        this.gameId = gameId;
-        figures = gameRepository.getAllFigures();
+    public FigureRestoreBuilder(int gameId, FigureBuilder builder) {
+        super(gameId);
         this.builder = builder;
     }
     @Override
@@ -23,8 +22,8 @@ public class FigureRestoreBuilder extends AbstractFigureBuilder {
             return new Figure(figure.getPoints(), figure.getPivot(), new Point(boardStartPoint.getX(), boardStartPoint.getY() + 1));
         }
         else{
-            Figure figure = new FigureClassicBuilder().next(boardStartPoint);
-            gameRepository.writeFigure(figure);
+            Figure figure = new FigureClassicBuilder(getGameId()).next(boardStartPoint);
+            repository.saveFigure(getGameId(), figure);
             return figure;
         }
     }

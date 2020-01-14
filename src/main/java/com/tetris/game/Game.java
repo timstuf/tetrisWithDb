@@ -14,7 +14,7 @@ public class Game {
     private final MoveHandler moveHandler;
     private final  Board board;
 
-    public void start(MoveEvent moveEvent){
+    public void start(){
         GameState state = ACTIVE;
         while(state == ACTIVE){
             board.doGame(moveHandler.getNewMoveEvent());

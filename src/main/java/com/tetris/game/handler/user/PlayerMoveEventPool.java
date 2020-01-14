@@ -19,11 +19,11 @@ public class PlayerMoveEventPool {
         pool.put("d", MOVE_RIGHT);
         pool.put("q", LEFT_ROTATE);
         pool.put("e", RIGHT_ROTATE);
-        pool.put("MOVE_LEFT", new MoveEvent(MOVE_LEFT));
-        pool.put("MOVE_DOWN", new MoveEvent(MOVE_DOWN));
-        pool.put("MOVE_RIGHT", new MoveEvent(MOVE_RIGHT));
-        pool.put("LEFT_ROTATE", new MoveEvent(LEFT_ROTATE));
-        pool.put("RIGHT_ROTATE", new MoveEvent(RIGHT_ROTATE));
+        pool.put("MOVE_LEFT", MOVE_LEFT);
+        pool.put("MOVE_DOWN", MOVE_DOWN);
+        pool.put("MOVE_RIGHT", MOVE_RIGHT);
+        pool.put("LEFT_ROTATE", LEFT_ROTATE);
+        pool.put("RIGHT_ROTATE",RIGHT_ROTATE);
         this.pool = Collections.unmodifiableMap(pool);
     }
 }

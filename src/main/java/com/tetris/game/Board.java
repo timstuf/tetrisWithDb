@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.tetris.game.handler.MoveEvent.MoveEventType.MOVE_DOWN;
+import static com.tetris.game.handler.MoveEvent.MOVE_DOWN;
 import static com.tetris.model.GameState.ACTIVE;
 import static com.tetris.model.GameState.FINISHED;
 
@@ -33,9 +33,9 @@ public class Board {
 
     public GameState doGame(MoveEvent moveEvent) {
 
-        Figure nextFigure = activeFigure.getNewFigureByMoveEventType(moveEvent.getType());
+        Figure nextFigure = activeFigure.getNewFigureByMoveEventType(moveEvent);
 
-        if (!isValidFigureCoordinates(nextFigure) && !isValidFigurePoints(nextFigure) && moveEvent.getType() == MOVE_DOWN) {
+        if (!isValidFigureCoordinates(nextFigure) && !isValidFigurePoints(nextFigure) && moveEvent == MOVE_DOWN) {
             log.debug("Change figure state on the board. Current state {}", activeFigure);
             addFigurePointsToFillPoints(activeFigure);
             activeFigure = figureBuilder.next(startFigurePoint);

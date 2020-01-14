@@ -11,9 +11,12 @@ import java.util.List;
 
 public class FigureClassicBuilder extends AbstractFigureBuilder {
     private List<Figure> classic = new ArrayList<>();
+    public FigureClassicBuilder(int gameId) {
+        super(gameId);
+    }
     @Override
     public Figure next(Point boardStartPoint) {
-        repository.saveFigure(getGameId(), 0);
+        repository.saveFigure(getGameId(), getRandomClassicFigure());
         throw new NotImplementedException();
     }
     private void fillFigures(){
@@ -66,6 +69,9 @@ public class FigureClassicBuilder extends AbstractFigureBuilder {
                 .currentCoordinateOnBoard(new Point(0, 1))
                 .build());
         points.clear();
+    }
+    private Figure getRandomClassicFigure(){
+        return null;
     }
 }
 
