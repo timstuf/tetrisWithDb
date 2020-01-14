@@ -1,21 +1,24 @@
-package com.tetris.model;
+package com.tetris.game.handler.user;
+
+import com.tetris.game.handler.MoveEvent;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.tetris.model.MoveEvent.MoveEventType.*;
+import static com.tetris.game.handler.MoveEvent.*;
+
 
 public class PlayerMoveEventPool {
     public final Map<String, MoveEvent> pool;
 
     public PlayerMoveEventPool() {
         Map<String, MoveEvent> pool = new HashMap<>();
-        pool.put("a", new MoveEvent(MOVE_LEFT));
-        pool.put("s", new MoveEvent(MOVE_DOWN));
-        pool.put("d", new MoveEvent(MOVE_RIGHT));
-        pool.put("q", new MoveEvent(LEFT_ROTATE));
-        pool.put("e", new MoveEvent(RIGHT_ROTATE));
+        pool.put("a", MOVE_LEFT);
+        pool.put("s", MOVE_DOWN);
+        pool.put("d", MOVE_RIGHT);
+        pool.put("q", LEFT_ROTATE);
+        pool.put("e", RIGHT_ROTATE);
         pool.put("MOVE_LEFT", new MoveEvent(MOVE_LEFT));
         pool.put("MOVE_DOWN", new MoveEvent(MOVE_DOWN));
         pool.put("MOVE_RIGHT", new MoveEvent(MOVE_RIGHT));

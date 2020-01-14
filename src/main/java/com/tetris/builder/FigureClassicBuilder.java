@@ -1,16 +1,19 @@
 package com.tetris.builder;
 
-import com.tetris.model.Figure;
+import com.tetris.database.repositories.impl.FigureRepository;
+import com.tetris.game.Figure;
 import com.tetris.model.Point;
+import lombok.AllArgsConstructor;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class FigureClassicBuilder implements FigureBuilder {
+public class FigureClassicBuilder extends AbstractFigureBuilder {
     private List<Figure> classic = new ArrayList<>();
     @Override
     public Figure next(Point boardStartPoint) {
+        repository.saveFigure(getGameId(), 0);
         throw new NotImplementedException();
     }
     private void fillFigures(){

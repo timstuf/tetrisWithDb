@@ -1,42 +1,27 @@
-package com.tetris.database;
+package com.tetris.database.repositories.impl;
 
-import com.tetris.model.Figure;
-import com.tetris.model.MoveEvent;
+import com.tetris.database.ConnectionFactory;
+import com.tetris.database.repositories.Repository;
+import com.tetris.game.Figure;
+import com.tetris.game.handler.MoveEvent;
 import com.tetris.model.Point;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ForkJoinPool;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
-public class GameData {
-    private int gameId;
+public class GameRepository implements Repository {
 
-    public GameData(int gameId) {
-        if(gameId==0)this.gameId = addGame();
-        else this.gameId = gameId;
+    public boolean isActiveGameExists(){
+        return false;
     }
 
-    public List<Figure> getAllFigures() {
-        List<Figure> figures = new ArrayList<>();
-        try (Connection connection = DataTables.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select * from figure where game_id = ?");
-            statement.setInt(1, gameId);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Figure figure = getFigureFromString(resultSet.getString("figure_points"), resultSet.getString("figure_pivot"));
-                figures.add(figure);
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return figures;
-    }
 
     public List<String> getAllMoves() {
         List<String> moves = new ArrayList<>();
-        try (Connection connection = DataTables.getConnection()) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("select * from action where game_id = ?");
             statement.setInt(1, gameId);
             ResultSet resultSet = statement.executeQuery();
@@ -50,7 +35,7 @@ public class GameData {
     }
 
     public void writeFigure(Figure figure) {
-        try (Connection connection = DataTables.getConnection()) {
+        try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("insert into figure(game_id, figure_points, figure_pivot) values(?,?,?)");
             int i = 0;
             statement.setInt(++i, gameId);
@@ -62,7 +47,7 @@ public class GameData {
         }
     }
     public void writeMove(MoveEvent moveEvent) {
-        try (Connection connection = DataTables.getConnection()) {
+        try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("insert into action(game_id, action_name) values(?,?)");
             int i = 0;
             statement.setInt(++i, gameId);
@@ -73,10 +58,11 @@ public class GameData {
         }
     }
 
-    private int getGameId() {
+    public Optional<int> getActiveGameId() {
+        return Optional.empty();
         if (gameId != 0) return gameId;
         int id=0;
-        try (Connection connection = DataTables.getConnection()) {
+        try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("select max(game_id) from game");
             ResultSet resultSet = statement.executeQuery();
             while(resultSet.next())
@@ -110,7 +96,7 @@ public class GameData {
         return x.concat(y);
     }
     public int addGame() {
-        try (Connection connection = DataTables.getConnection()) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("insert into game (GAME_STATUS) values(?)");
             statement.setString(1, "in progress");
             statement.execute();
@@ -120,8 +106,8 @@ public class GameData {
         return getGameId();
     }
 
-    public void finishGame() {
-        try (Connection connection = DataTables.getConnection()) {
+    public void finishGame(int gameId) {
+        try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("update game set GAME_STATUS = ? where game_id = ?");
             statement.setString(1, "finished");
             statement.setInt(2, gameId);
