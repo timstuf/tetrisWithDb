@@ -7,11 +7,12 @@ import com.tetris.game.Board;
 import com.tetris.game.handler.MoveEvent;
 import com.tetris.game.handler.MoveHandler;
 import com.tetris.game.handler.user.PlayerMoveEventPool;
+import lombok.Getter;
 
 import java.util.List;
 import java.util.Scanner;
 
-
+@Getter
 public class UserMoveHandler implements MoveHandler {
     private final int gameId;
     private final MoveRepository moveRepository = new MoveRepository();
@@ -23,23 +24,15 @@ public class UserMoveHandler implements MoveHandler {
     @Override
     public MoveEvent getNewMoveEvent() {
         Scanner scanner = new Scanner(System.in);
-
         MoveEvent event;
-        do {
-            event = moveEventPool.pool.get(scanner.nextLine());
-            moveRepository.saveNewMoveEvent(gameId, event);
-        } while (event == null);
+        event = moveEventPool.pool.get(scanner.nextLine());
+        moveRepository.saveNewMoveEvent(gameId, event);
         return event;
     }
 
 
-    private void doDbMoves(Board board) {
-        List<String> moves = moveRepository.getAllMoves(gameId);
-        while (moves.size() > 0) {
-            board.doGame(moveEventPool.pool.get(moves.get(0)));
-            moves.remove(0);
-        }
-    }
+
+
 
 
 }

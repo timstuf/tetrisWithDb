@@ -7,7 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public abstract class AbstractFigureBuilder implements FigureBuilder{
-     final FigureRepository repository = new FigureRepository();
+     final FigureRepository figureRepository = new FigureRepository();
     private final int gameId;
 
 }

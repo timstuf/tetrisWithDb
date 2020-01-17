@@ -10,10 +10,9 @@ import static com.tetris.game.handler.MoveEvent.*;
 
 
 public class PlayerMoveEventPool {
-    public final Map<String, MoveEvent> pool;
+    public static Map<String, MoveEvent> pool = new HashMap<>();
 
     public PlayerMoveEventPool() {
-        Map<String, MoveEvent> pool = new HashMap<>();
         pool.put("a", MOVE_LEFT);
         pool.put("s", MOVE_DOWN);
         pool.put("d", MOVE_RIGHT);
@@ -24,6 +23,6 @@ public class PlayerMoveEventPool {
         pool.put("MOVE_RIGHT", MOVE_RIGHT);
         pool.put("LEFT_ROTATE", LEFT_ROTATE);
         pool.put("RIGHT_ROTATE",RIGHT_ROTATE);
-        this.pool = Collections.unmodifiableMap(pool);
+        pool = Collections.unmodifiableMap(pool);
     }
 }

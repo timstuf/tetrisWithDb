@@ -1,77 +1,24 @@
 package com.tetris.builder;
 
-import com.tetris.database.repositories.impl.FigureRepository;
 import com.tetris.game.Figure;
 import com.tetris.model.Point;
-import lombok.AllArgsConstructor;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class FigureClassicBuilder extends AbstractFigureBuilder {
-    private List<Figure> classic = new ArrayList<>();
     public FigureClassicBuilder(int gameId) {
         super(gameId);
     }
     @Override
     public Figure next(Point boardStartPoint) {
-        repository.saveFigure(getGameId(), getRandomClassicFigure());
-        throw new NotImplementedException();
-    }
-    private void fillFigures(){
-        List<Point> points = new ArrayList<>();
-        //####
-        points.add(new Point(0,0));
-        points.add(new Point(0,1));
-        points.add(new Point(0,2));
-        points.add(new Point(0,3));
-        classic.add( Figure.builder()
-                .points(points)
-                .pivot(new Point(0, 1))
-                .currentCoordinateOnBoard(new Point(0, 1))
-                .build());
-        points.clear();
-
-        //###
-        // #
-        points.add(new Point(1,0));
-        points.add(new Point(1,1));
-        points.add(new Point(1,2));
-        points.add(new Point(0,1));
-        classic.add( Figure.builder()
-                .points(points)
-                .pivot(new Point(1, 1))
-                .currentCoordinateOnBoard(new Point(0, 1))
-                .build());
-        points.clear();
-        //###
-        //  #
-        points.add(new Point(1,0));
-        points.add(new Point(1,1));
-        points.add(new Point(1,2));
-        points.add(new Point(0,2));
-        classic.add( Figure.builder()
-                .points(points)
-                .pivot(new Point(1, 2))
-                .currentCoordinateOnBoard(new Point(0, 1))
-                .build());
-        points.clear();
-        //##
-        //##
-        points.add(new Point(0,2));
-        points.add(new Point(1,1));
-        points.add(new Point(1,2));
-        points.add(new Point(0,1));
-        classic.add( Figure.builder()
-                .points(points)
-                .pivot(new Point(1, 1))
-                .currentCoordinateOnBoard(new Point(0, 1))
-                .build());
-        points.clear();
+        Figure figure = getRandomClassicFigure();
+        figureRepository.saveFigure(getGameId(), FigureTypePool.getFigureIdByFigure(figure));
+        return new Figure(figure.getPoints(), figure.getPivot(), new Point(boardStartPoint.getX(), boardStartPoint.getY() + 1));
     }
     private Figure getRandomClassicFigure(){
-        return null;
+        Random random = new Random();
+        int k = random.nextInt(5);
+        return FigureTypePool.figurePool.get(k);
     }
 }
 

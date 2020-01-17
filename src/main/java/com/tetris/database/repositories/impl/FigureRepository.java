@@ -15,27 +15,25 @@ import java.util.stream.Collectors;
 
 public class FigureRepository implements Repository {
 
-    public void saveFigure(int gameId, Figure figure){
+    public void saveFigure(int gameId, int figureId){
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("insert into figure(game_id, figure_points, figure_pivot) values(?,?,?)");
+            PreparedStatement statement = connection.prepareStatement("insert into figure(game_id, figure_id) values(?,?)");
             int i = 0;
             statement.setInt(++i, gameId);
-            statement.setString(++i, figureToString(figure));
-            statement.setString(++i, getPivot(figure));
+            statement.setInt(++i, figureId);
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    public List<Figure> getFiguresByGameId(int gameId){
-        List<Figure> figures = new ArrayList<>();
+    public List<Integer> getFiguresByGameId(int gameId){
+        List<Integer> figures = new ArrayList<>();
         try (Connection connection = ConnectionFactory.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select * from figure where game_id = ?");
+            PreparedStatement statement = connection.prepareStatement("select figure_id from figure where game_id = ?");
             statement.setInt(1, gameId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Figure figure = getFigureFromString(resultSet.getString("figure_points"), resultSet.getString("figure_pivot"));
-                figures.add(figure);
+                figures.add(resultSet.getInt(1));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -56,12 +54,6 @@ public class FigureRepository implements Repository {
                 .build();
     }
 
-    private String figureToString(Figure figure) {
-        return figure.getPoints().stream().map(point -> String.valueOf(point.getX()) + point.getY()).collect(Collectors.joining());
-    }
-    private String getPivot(Figure figure){
-        String x = String.valueOf(figure.getPivot().getX());
-        String y = String.valueOf(figure.getPivot().getY());
-        return x.concat(y);
-    }
+
+
 }
