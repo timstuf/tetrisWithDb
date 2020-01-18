@@ -39,7 +39,7 @@ public class GameRepository implements Repository {
 
     public int createNewGame() {
         try (Connection connection = ConnectionFactory.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("insert into game (GAME_STATUS) values(?)");
+            PreparedStatement statement = connection.prepareStatement("INSERT INTO game (GAME_STATUS) values(?)");
             statement.setString(1, String.valueOf(GameState.ACTIVE));
             statement.execute();
         } catch (SQLException e) {
@@ -50,7 +50,7 @@ public class GameRepository implements Repository {
 
     public static void finishGame(int gameId) {
         try (Connection connection = ConnectionFactory.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("update game set GAME_STATUS = ? where game_id = ?");
+            PreparedStatement statement = connection.prepareStatement("UPDATE game SET game_status = ? WHERE game_id = ?");
             statement.setString(1, "FINISHED");
             statement.setInt(2, gameId);
             statement.execute();

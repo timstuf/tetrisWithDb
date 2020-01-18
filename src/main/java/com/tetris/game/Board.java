@@ -66,7 +66,7 @@ public class Board {
 
     public String getStringState() {
         char[][] charBoard = new char[height][width];
-        fillPoints.forEach(point -> charBoard[point.getX()][point.getY()] = '#');
+        fillPoints.forEach(point -> charBoard[point.getY()][point.getX()] = '#');
         activeFigure.getPointsByBoardCoordinates().forEach(point -> charBoard[point.getY()][point.getX()] = 'X');
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < height; i++) {

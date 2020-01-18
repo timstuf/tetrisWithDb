@@ -12,15 +12,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.tetris.database.ConnectionFactory.getConnection;
 
-public class FigureTypePool {
+class FigureTypePool {
     static Map<Integer, Figure> figurePool;
     private FigureTypeRepository figureTypeRepository = new FigureTypeRepository();
 
-    public FigureTypePool() {
+    FigureTypePool() {
         figurePool = new HashMap<>();
         fillMap();
         figurePool = Collections.unmodifiableMap(figurePool);
-        figureTypeRepository.fillRepository(figurePool);
+        figureTypeRepository.fillJsonRepository(figurePool);
     }
     private void fillMap(){
         List<Point> points0 = new ArrayList<>();
@@ -88,14 +88,14 @@ public class FigureTypePool {
                 .build());
     }
 
-    public static Integer getFigureIdByFigure(Figure value) {
+    static Integer getFigureIdByFigure(Figure value) {
         return figurePool.entrySet().stream()
                 .filter(entry -> value.equals(entry.getValue()))
                 .map(Map.Entry::getKey)
                 .findFirst().get();
     }
 
-    public static List<Figure> getFiguresByType(List<Integer> types){
+    static List<Figure> getFiguresByType(List<Integer> types){
         List<Figure> figures = new ArrayList<>();
         types.forEach((k)-> figures.add(figurePool.get(k)));
         return figures;

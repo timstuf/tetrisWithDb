@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 
 public class MoveRepository implements Repository {
@@ -24,8 +26,8 @@ public class MoveRepository implements Repository {
             e.printStackTrace();
         }
     }
-    public List<String> getAllMoves(int gameId) {
-        List<String> moves = new ArrayList<>();
+    public Deque<String> getAllMoves(int gameId) {
+        Deque<String> moves = new ArrayDeque<>();
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("select * from action where game_id = ?");
             statement.setInt(1, gameId);

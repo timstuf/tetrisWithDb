@@ -1,6 +1,9 @@
 package com.tetris.database.repositories.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tetris.game.Figure;
+import lombok.extern.slf4j.Slf4j;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -10,32 +13,23 @@ import java.util.stream.Collectors;
 
 import static com.tetris.database.ConnectionFactory.getConnection;
 
+@Slf4j
 public class FigureTypeRepository {
-    private String figurePointsToString(Figure figure) {
-        return figure.getPoints().stream().map(point -> String.valueOf(point.getX()) + point.getY()).collect(Collectors.joining());
-    }
-    private String getPivotInString(Figure figure){
-        String x = String.valueOf(figure.getPivot().getX());
-        String y = String.valueOf(figure.getPivot().getY());
-        return x.concat(y);
-    }
 
-    public void fillRepository(Map<Integer, Figure> figurePool){
+    public void fillJsonRepository(Map<Integer, Figure> figurePool){
         clearRepository();
-        try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("insert into figure_type(figure_id, figure_points, figure_pivot) values(?,?,?)");
-            figurePool.forEach((k, v) -> {
-                try {
-                    statement.setInt(1, k);
-                    statement.setString(2, figurePointsToString(v));
-                    statement.setString(3, getPivotInString(v));
-                    statement.execute();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (SQLException e) {
-            e.printStackTrace();
+        ObjectMapper objectMapper = new ObjectMapper();
+        try(Connection connection = getConnection()){
+            PreparedStatement statement = connection.prepareStatement("insert into figure_type(figure_id, figure) values(?,?)");
+        figurePool.forEach((k,v)->{
+            try {
+                statement.setInt(1, k);
+                statement.setString(2, objectMapper.writeValueAsString(v));
+            } catch (SQLException | JsonProcessingException e) {
+                log.error(e.getMessage());
+            }
+        });}catch (SQLException e){
+            log.error(e.getMessage());
         }
     }
     private void clearRepository(){

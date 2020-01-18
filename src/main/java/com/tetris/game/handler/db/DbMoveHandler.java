@@ -8,12 +8,12 @@ import com.tetris.game.handler.user.PlayerMoveEventPool;
 import com.tetris.game.handler.user.UserMoveHandler;
 import lombok.AllArgsConstructor;
 
-import java.util.List;
+import java.util.Deque;
 
 
 public class DbMoveHandler implements MoveHandler {
     private final UserMoveHandler userMoveHandler;
-    private final List<String> dbMoves;
+    private final Deque<String> dbMoves;
 
     public DbMoveHandler(UserMoveHandler userMoveHandler) {
         this.userMoveHandler = userMoveHandler;
@@ -23,13 +23,11 @@ public class DbMoveHandler implements MoveHandler {
     @Override
     public MoveEvent getNewMoveEvent() {
         if(dbMoves.size()>0){
-            MoveEvent event = PlayerMoveEventPool.pool.get(dbMoves.get(0));
-            dbMoves.remove(0);
-            return event;
+            return PlayerMoveEventPool.pool.get(dbMoves.pop());
         }
         else return userMoveHandler.getNewMoveEvent();
     }
-    private List<String> getDbMoves() {
+    private Deque<String> getDbMoves() {
         return userMoveHandler.getMoveRepository().getAllMoves(userMoveHandler.getGameId());
     }
 }
