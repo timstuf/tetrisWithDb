@@ -9,7 +9,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,8 +28,8 @@ public class FigureRepository implements Repository {
             e.printStackTrace();
         }
     }
-    public List<Integer> getFiguresByGameId(int gameId){
-        List<Integer> figures = new ArrayList<>();
+    public Deque<Integer> getFiguresByGameId(int gameId){
+        Deque<Integer> figures = new ArrayDeque<>();
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("select figure_id from figure where game_id = ?");
             statement.setInt(1, gameId);

@@ -11,5 +11,11 @@ public enum  MoveEvent {
         MoveEvent(String move){
                 this.move = move;
         }
+        public static MoveEvent get(String move){
+                for(MoveEvent e : MoveEvent.values()){
+                        if(move.equals(e.move)) return e;
+                }
+                return null;
+        }
 
 }

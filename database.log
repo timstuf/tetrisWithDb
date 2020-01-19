@@ -1,1 +1,64 @@
-21:53:25.117 [main] INFO  com.tetris.Application - Start tetris application []
+18:00:22.995 [main] INFO  com.tetris.Application - Start tetris application []
+18:00:42.555 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.268 [main] DEBUG com.tetris.game.Figure - Figure rotate event LEFT_ROTATE
+18:00:48.269 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.270 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.270 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.271 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.272 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.272 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.272 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.273 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.273 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.273 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.273 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.274 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.274 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.275 [main] DEBUG com.tetris.game.Board - Add figure to fill points Figure(points=[Point(x=1, y=0), Point(x=0, y=0), Point(x=-1, y=0), Point(x=-2, y=0)], pivot=Point(x=0, y=1), currentCoordinateOnBoard=Point(x=5, y=14))
+18:00:48.275 [main] DEBUG com.tetris.game.Board - Change figure state on the board. New state Figure(points=[Point(x=0, y=2), Point(x=1, y=1), Point(x=1, y=2), Point(x=0, y=1)], pivot=Point(x=1, y=1), currentCoordinateOnBoard=Point(x=5, y=1))
+18:00:48.275 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.275 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.276 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.276 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.276 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.277 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.277 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.278 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.278 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.278 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.278 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.278 [main] DEBUG com.tetris.game.Board - Add figure to fill points Figure(points=[Point(x=0, y=2), Point(x=1, y=1), Point(x=1, y=2), Point(x=0, y=1)], pivot=Point(x=1, y=1), currentCoordinateOnBoard=Point(x=5, y=11))
+18:00:48.278 [main] DEBUG com.tetris.game.Board - Change figure state on the board. New state Figure(points=[Point(x=0, y=0), Point(x=1, y=0), Point(x=1, y=1), Point(x=2, y=1)], pivot=Point(x=1, y=1), currentCoordinateOnBoard=Point(x=5, y=1))
+18:00:48.279 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_LEFT
+18:00:48.279 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.279 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.280 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.280 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.280 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.281 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.281 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.281 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.282 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.282 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:48.282 [main] DEBUG com.tetris.game.Board - Add figure to fill points Figure(points=[Point(x=0, y=0), Point(x=1, y=0), Point(x=1, y=1), Point(x=2, y=1)], pivot=Point(x=1, y=1), currentCoordinateOnBoard=Point(x=4, y=10))
+18:00:48.283 [main] DEBUG com.tetris.game.Board - Change figure state on the board. New state Figure(points=[Point(x=0, y=0), Point(x=0, y=1), Point(x=0, y=2), Point(x=0, y=3)], pivot=Point(x=0, y=1), currentCoordinateOnBoard=Point(x=5, y=1))
+18:00:55.227 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:00:59.451 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_RIGHT
+18:01:03.007 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_RIGHT
+18:01:07.312 [main] DEBUG com.tetris.game.Figure - Figure rotate event LEFT_ROTATE
+18:01:12.458 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:01:12.881 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:01:13.340 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:01:13.761 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:01:14.164 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:01:14.487 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:01:14.792 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:01:15.103 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_DOWN
+18:01:15.103 [main] DEBUG com.tetris.game.Board - Add figure to fill points Figure(points=[Point(x=1, y=0), Point(x=0, y=0), Point(x=-1, y=0), Point(x=-2, y=0)], pivot=Point(x=0, y=1), currentCoordinateOnBoard=Point(x=7, y=9))
+18:01:15.230 [main] DEBUG com.tetris.game.Board - Change figure state on the board. New state Figure(points=[Point(x=0, y=0), Point(x=1, y=0), Point(x=1, y=1), Point(x=2, y=1)], pivot=Point(x=1, y=1), currentCoordinateOnBoard=Point(x=5, y=1))
+18:01:21.536 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_LEFT
+18:01:24.500 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_LEFT
+18:01:26.847 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_LEFT
+18:01:30.220 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_LEFT
+18:01:32.729 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_LEFT
+18:01:36.445 [main] DEBUG com.tetris.game.Figure - Figure move event MOVE_LEFT

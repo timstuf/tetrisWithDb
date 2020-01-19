@@ -23,7 +23,7 @@ public class DbMoveHandler implements MoveHandler {
     @Override
     public MoveEvent getNewMoveEvent() {
         if(dbMoves.size()>0){
-            return PlayerMoveEventPool.pool.get(dbMoves.pop());
+            return MoveEvent.get(dbMoves.pop());
         }
         else return userMoveHandler.getNewMoveEvent();
     }

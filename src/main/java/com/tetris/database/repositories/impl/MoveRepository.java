@@ -17,7 +17,7 @@ public class MoveRepository implements Repository {
 
     public void saveNewMoveEvent(int gameId, MoveEvent event){
         try (Connection connection = getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("insert into action(game_id, action_name) values(?,?)");
+            PreparedStatement statement = connection.prepareStatement("insert into move(game_id, move_name) values(?,?)");
             int i = 0;
             statement.setInt(++i, gameId);
             statement.setString(++i, event.toString());
@@ -29,11 +29,11 @@ public class MoveRepository implements Repository {
     public Deque<String> getAllMoves(int gameId) {
         Deque<String> moves = new ArrayDeque<>();
         try (Connection connection = ConnectionFactory.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement("select * from action where game_id = ?");
+            PreparedStatement statement = connection.prepareStatement("select * from move where game_id = ?");
             statement.setInt(1, gameId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                moves.add(resultSet.getString("action_name"));
+                moves.add(resultSet.getString("move_name"));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

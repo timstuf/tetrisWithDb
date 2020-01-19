@@ -13,8 +13,6 @@ public class Application {
 
     public static void main(String[] args) {
         log.info("Start tetris application {}", Arrays.toString(args));
-        new UniversalRepository().saveToRepository(new DbFigure(1,1));
-       // new DataTables().doEverything();
         GameBuilder.build().start();
     }
 }

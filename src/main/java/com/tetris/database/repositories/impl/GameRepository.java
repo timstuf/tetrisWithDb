@@ -22,7 +22,6 @@ public class GameRepository implements Repository {
         }
         return false;
     }
-
     public Optional<Integer> getActiveGameId() {
         int id = 0;
         try (Connection connection = getConnection()) {
@@ -35,8 +34,6 @@ public class GameRepository implements Repository {
         }
         return Optional.of(id);
     }
-
-
     public int createNewGame() {
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO game (GAME_STATUS) values(?)");
@@ -47,7 +44,6 @@ public class GameRepository implements Repository {
         }
         return getActiveGameId().get();
     }
-
     public static void finishGame(int gameId) {
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("UPDATE game SET game_status = ? WHERE game_id = ?");

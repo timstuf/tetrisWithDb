@@ -95,8 +95,8 @@ class FigureTypePool {
                 .findFirst().get();
     }
 
-    static List<Figure> getFiguresByType(List<Integer> types){
-        List<Figure> figures = new ArrayList<>();
+    static Deque<Figure> getFiguresByType(Deque<Integer> types){
+        Deque<Figure> figures = new ArrayDeque<>();
         types.forEach((k)-> figures.add(figurePool.get(k)));
         return figures;
     }

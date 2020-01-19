@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -27,8 +28,9 @@ public class UniversalRepository {
         }
     }
 
+
     private <T> String countFieldsAndMakeQuestionMarks(T parameter) {
-        int length =  parameter.getClass().getFields().length;
+        int length =  parameter.getClass().getDeclaredFields().length;
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < length; i++) {
             builder.append("?,");
@@ -41,15 +43,16 @@ public class UniversalRepository {
         return statement.toString();
     }
     private <T> void setType(PreparedStatement statement, Field field, int i, T parameter){
+        field.setAccessible(true);
         Type type = field.getType();
-        if(type.toString().equals("String")){
+        if(type.getTypeName().equals("java.lang.String")){
             try {
                 statement.setString(i,field.get(parameter).toString());
             } catch (SQLException | IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
-        else if(type.toString().equals("int")){
+        else if(type.getTypeName().equals("int")){
             try {
                 statement.setInt(i, (Integer) field.get(parameter));
             } catch (SQLException | IllegalAccessException e) {
@@ -60,8 +63,8 @@ public class UniversalRepository {
     private <T> String getStatement(T parameter){
         String tableName = parameter.getClass().getAnnotation(Table.class).value();
         String questionMarks = countFieldsAndMakeQuestionMarks(parameter);
-        Field[] fields = parameter.getClass().getFields();
-        String columnNames = Arrays.stream(fields).map(field->String.valueOf(field.getAnnotation(Column.class))).collect(Collectors.joining(", "));
+        Field[] fields = parameter.getClass().getDeclaredFields();
+        String columnNames = Arrays.stream(fields).map(field->String.valueOf(field.getAnnotation(Column.class).value())).collect(Collectors.joining(", "));
         //String columnValues = Arrays.stream(fields).map(field->field.get.collect(Collectors.joining(", "));
         StringBuilder statement = new StringBuilder();
         statement.append("INSERT INTO ").append(tableName).append(" (").append(columnNames).
