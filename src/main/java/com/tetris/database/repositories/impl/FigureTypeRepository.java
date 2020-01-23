@@ -17,7 +17,7 @@ import static com.tetris.database.ConnectionFactory.getConnection;
 public class FigureTypeRepository {
 
     public void fillJsonRepository(Map<Integer, Figure> figurePool){
-        clearRepository();
+        //clearRepository();
         ObjectMapper objectMapper = new ObjectMapper();
         try(Connection connection = getConnection()){
             PreparedStatement statement = connection.prepareStatement("insert into figure_type(figure_id, figure) values(?,?)");

@@ -1,6 +1,9 @@
 package com.tetris.database.repositories.impl;
 
 import com.tetris.database.ConnectionFactory;
+import com.tetris.database.entity.DbFigure;
+import com.tetris.database.entity.DbGame;
+import com.tetris.database.hibernate.repositories.FigureDAO;
 import com.tetris.database.repositories.Repository;
 import com.tetris.game.Figure;
 import com.tetris.model.Point;
@@ -18,7 +21,9 @@ import java.util.stream.Collectors;
 public class FigureRepository implements Repository {
 
     public void saveFigure(int gameId, int figureId){
-        try (Connection connection = getConnection()) {
+        DbFigure figure = new DbFigure(gameId, figureId);
+        FigureDAO.addFigure(figure);
+        /*try (Connection connection = getConnection()) {
             PreparedStatement statement = connection.prepareStatement("insert into figure(game_id, figure_id) values(?,?)");
             int i = 0;
             statement.setInt(++i, gameId);
@@ -26,10 +31,12 @@ public class FigureRepository implements Repository {
             statement.execute();
         } catch (SQLException e) {
             e.printStackTrace();
-        }
+        }*/
     }
     public Deque<Integer> getFiguresByGameId(int gameId){
-        Deque<Integer> figures = new ArrayDeque<>();
+        DbGame game = FigureDAO.getGameById(gameId);
+        return game.getFigures().stream().map(figure->figure.getFigureId()).collect(Collectors.toCollection(ArrayDeque::new));
+        /* Deque<Integer> figures = new ArrayDeque<>();
         try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("select figure_id from figure where game_id = ?");
             statement.setInt(1, gameId);
@@ -40,7 +47,7 @@ public class FigureRepository implements Repository {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return figures;
+        return figures;*/
     }
     private Figure getFigureFromString(String spoints, String pivot) {
         List<Point> figurePoints = new ArrayList<>();

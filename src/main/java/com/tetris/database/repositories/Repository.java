@@ -9,6 +9,4 @@ public interface Repository {
     default Connection getConnection(){
         return ConnectionFactory.getConnection();
     }
-
-
 }

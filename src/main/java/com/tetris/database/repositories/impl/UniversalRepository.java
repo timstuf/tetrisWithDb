@@ -1,7 +1,7 @@
 package com.tetris.database.repositories.impl;
 
-import com.tetris.database.entity.annotations.Column;
-import com.tetris.database.entity.annotations.Table;
+import com.tetris.database.entity.annotations.MyColumn;
+import com.tetris.database.entity.annotations.MyTable;
 import lombok.extern.slf4j.Slf4j;
 
 import java.lang.reflect.Field;
@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Arrays;
-import java.util.Deque;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -61,10 +60,11 @@ public class UniversalRepository {
         }
     }
     private <T> String getStatement(T parameter){
-        String tableName = parameter.getClass().getAnnotation(Table.class).value();
+        log.debug("getStatement for T parameter = {}", parameter);
+        String tableName = parameter.getClass().getAnnotation(MyTable.class).value();
         String questionMarks = countFieldsAndMakeQuestionMarks(parameter);
         Field[] fields = parameter.getClass().getDeclaredFields();
-        String columnNames = Arrays.stream(fields).map(field->String.valueOf(field.getAnnotation(Column.class).value())).collect(Collectors.joining(", "));
+        String columnNames = Arrays.stream(fields).map(field-> field.getAnnotation(MyColumn.class).value()).collect(Collectors.joining(", "));
         //String columnValues = Arrays.stream(fields).map(field->field.get.collect(Collectors.joining(", "));
         StringBuilder statement = new StringBuilder();
         statement.append("INSERT INTO ").append(tableName).append(" (").append(columnNames).

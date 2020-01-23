@@ -1,14 +1,28 @@
 package com.tetris.database.entity;
 
-import com.tetris.database.entity.annotations.Column;
-import com.tetris.database.entity.annotations.Table;
+import com.tetris.database.entity.annotations.MyColumn;
+import com.tetris.database.entity.annotations.MyTable;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.ToString;
+import org.hibernate.annotations.GenericGenerator;
 
-@AllArgsConstructor
-@Table("figure_type")
+import javax.persistence.*;
+
+@Data
+@MyTable("figure_type")
+@Table(name = "figure_type")
+@Entity
 public class DbFigureType {
- @Column("figure_id")
-    private int figure_id;
-    @Column("figure")
- private String figure;
+
+    @MyColumn("figure_id")  @Column(name = "figure_id")
+    @Id
+    @GeneratedValue(generator = "increment")
+    @GenericGenerator(name = "increment", strategy = "increment")
+    private int figureId;
+
+    @MyColumn("figure")
+    private String figure;
+
+    public DbFigureType(){}
 }
