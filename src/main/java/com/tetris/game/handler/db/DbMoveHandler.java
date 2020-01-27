@@ -1,7 +1,5 @@
 package com.tetris.game.handler.db;
 
-import com.tetris.database.repositories.impl.MoveRepository;
-import com.tetris.game.Board;
 import com.tetris.game.handler.MoveEvent;
 import com.tetris.game.handler.MoveHandler;
 import com.tetris.game.handler.user.PlayerMoveEventPool;

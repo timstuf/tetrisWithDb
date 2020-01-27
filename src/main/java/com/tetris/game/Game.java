@@ -1,9 +1,7 @@
 package com.tetris.game;
 
 import com.sun.org.apache.bcel.internal.generic.ACONST_NULL;
-import com.tetris.database.repositories.impl.GameRepository;
-import com.tetris.database.repositories.impl.MoveRepository;
-import com.tetris.game.handler.MoveEvent;
+import com.tetris.database.repositories.hiberimpl.HiberGameRepository;
 import com.tetris.game.handler.MoveHandler;
 import com.tetris.model.GameState;
 import lombok.AllArgsConstructor;
@@ -22,6 +20,6 @@ public class Game {
             System.out.println(board.getStringState());
             state = board.doGame(moveHandler.getNewMoveEvent());
         }
-        GameRepository.finishGame(gameId);
+        HiberGameRepository.finishGame(gameId);
     }
 }

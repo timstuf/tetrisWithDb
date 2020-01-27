@@ -2,7 +2,7 @@ package com.tetris.database.repositories.impl;
 
 import com.tetris.database.ConnectionFactory;
 import com.tetris.database.entity.DbGame;
-import com.tetris.database.hibernate.repositories.FigureDAO;
+import com.tetris.database.hibernate.repositories.Hiber;
 import com.tetris.database.repositories.Repository;
 import com.tetris.model.GameState;
 
@@ -37,15 +37,13 @@ public class GameRepository implements Repository {
         return Optional.of(id);
     }
     public int createNewGame() {
-        DbGame game = new DbGame(String.valueOf(GameState.ACTIVE));
-        FigureDAO.addGame(game);
-        /*try (Connection connection = ConnectionFactory.getConnection()) {
+       try (Connection connection = ConnectionFactory.getConnection()) {
             PreparedStatement statement = connection.prepareStatement("INSERT INTO game (GAME_STATUS) values(?)");
             statement.setString(1, String.valueOf(GameState.ACTIVE));
             statement.execute();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-        }*/
+        }
         return getActiveGameId().get();
     }
     public static void finishGame(int gameId) {

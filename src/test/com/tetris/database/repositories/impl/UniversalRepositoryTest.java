@@ -1,10 +1,9 @@
 package com.tetris.database.repositories.impl;
 
-import com.tetris.database.entity.DbFigure;
 import com.tetris.database.entity.DbFigureType;
 import com.tetris.database.entity.DbGame;
+import com.tetris.model.GameState;
 import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 class UniversalRepositoryTest {
@@ -13,7 +12,7 @@ class UniversalRepositoryTest {
     @Ignore
     @Test
     void saveGame() {
-        DbGame dbGame = new DbGame("FINISHED");
+        DbGame dbGame = new DbGame(GameState.FINISHED);
         universalRepository.saveToRepository(dbGame);
     }
     @Ignore

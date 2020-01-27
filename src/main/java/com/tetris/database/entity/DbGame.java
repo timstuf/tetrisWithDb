@@ -2,39 +2,40 @@ package com.tetris.database.entity;
 
 import com.tetris.database.entity.annotations.MyColumn;
 import com.tetris.database.entity.annotations.MyTable;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.ToString;
+import com.tetris.model.GameState;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.util.ArrayDeque;
-import java.util.Collection;
-import java.util.Deque;
+import java.util.*;
 
-@Data
-@MyTable("game")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @Table(name = "game")
 @Entity
 public class DbGame {
 
-    @MyColumn("game_id") @Column(name = "game_id")
+    @Column(name = "game_id")
     @Id
-    @GeneratedValue(generator = "increment")
-    @GenericGenerator(name = "increment", strategy = "increment")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int gameId;
 
-    @MyColumn("game_status") @Column(name = "game_status")
-    private String gameStatus;
+    @Column(name = "game_status")
+    @Enumerated(EnumType.STRING)
+    private GameState gameStatus;
 
-    @OneToMany
-    private Collection<DbMove> moves = new ArrayDeque<>();
+    @OneToMany(mappedBy = "game",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<DbMove> moves = new ArrayList<>();
 
-    @OneToMany
-    private Collection<DbFigure> figures = new ArrayDeque<>();
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(name = "figure",
+            joinColumns = {@JoinColumn(name = "game_id")},
+            inverseJoinColumns = {@JoinColumn(name = "figure_id")})
+    public List<DbFigureType> figures = new ArrayList<>();
 
-    public DbGame(){}
-    public DbGame(String gameStatus){
+    public DbGame(GameState gameStatus) {
         this.gameStatus = gameStatus;
     }
 }

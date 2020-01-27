@@ -15,7 +15,7 @@ public class FigureRestoreBuilder extends AbstractFigureBuilder {
     public FigureRestoreBuilder(int gameId, FigureBuilder builder) {
         super(gameId);
         this.builder = builder;
-        Deque<Integer> figuresId = getFigureRepository().getFiguresByGameId(gameId);
+        Deque<Integer> figuresId = getFigureRepository().getAllFigures(gameId);
         figures = FigureTypePool.getFiguresByType(figuresId);
     }
     @Override

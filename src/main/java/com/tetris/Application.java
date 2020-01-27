@@ -1,7 +1,5 @@
 package com.tetris;
 
-import com.tetris.database.entity.DbFigure;
-import com.tetris.database.repositories.impl.UniversalRepository;
 import com.tetris.game.GameBuilder;
 import lombok.extern.slf4j.Slf4j;
 

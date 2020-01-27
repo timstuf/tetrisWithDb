@@ -1,6 +1,6 @@
-package com.tetris.database.repositories.impl;
+package com.tetris.database.repositories.hiberimpl;
 
-import com.tetris.database.repositories.hiberimpl.HiberMoveRepository;
+import com.tetris.database.ConnectionFactory;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayDeque;
@@ -8,7 +8,7 @@ import java.util.Deque;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class MoveRepositoryTest {
+class HiberMoveRepositoryTest {
     private HiberMoveRepository moveRepository = new HiberMoveRepository();
     @Test
     public void getAllMovesTest() {
@@ -16,5 +16,9 @@ class MoveRepositoryTest {
         expected.add("MOVE_DOWN");
         Deque<String> actual = moveRepository.getAllMoves(12);
         assertEquals(expected, actual);
+    }
+    @Test
+    public void getHiber(){
+        ConnectionFactory.sessionFactory.openSession();
     }
 }

@@ -25,6 +25,7 @@ public class FigureTypeRepository {
             try {
                 statement.setInt(1, k);
                 statement.setString(2, objectMapper.writeValueAsString(v));
+                statement.execute();
             } catch (SQLException | JsonProcessingException e) {
                 log.error(e.getMessage());
             }

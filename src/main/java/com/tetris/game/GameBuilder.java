@@ -2,7 +2,7 @@ package com.tetris.game;
 
 import com.tetris.builder.FigureBuilder;
 import com.tetris.builder.FigureBuilderFactory;
-import com.tetris.database.repositories.impl.GameRepository;
+import com.tetris.database.repositories.hiberimpl.HiberGameRepository;
 import com.tetris.game.handler.db.DbMoveHandler;
 import com.tetris.game.handler.user.UserMoveHandler;
 import java.util.Optional;
@@ -11,7 +11,7 @@ public class GameBuilder {
     private static int HEIGHT = 15;
     private static int WIDTH = 10;
 
-    private static final GameRepository gameRepository = new GameRepository();
+    private static final HiberGameRepository gameRepository = new HiberGameRepository();
     public static Game build() {
         if(gameRepository.isActiveGameExists()){
             Optional<Integer> activeGameId = gameRepository.getActiveGameId();

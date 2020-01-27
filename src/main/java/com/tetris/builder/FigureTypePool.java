@@ -20,7 +20,7 @@ class FigureTypePool {
         figurePool = new HashMap<>();
         fillMap();
         figurePool = Collections.unmodifiableMap(figurePool);
-       // figureTypeRepository.fillJsonRepository(figurePool);
+        //figureTypeRepository.fillJsonRepository(figurePool);
     }
     private void fillMap(){
         List<Point> points0 = new ArrayList<>();
