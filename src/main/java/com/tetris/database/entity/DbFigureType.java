@@ -18,10 +18,12 @@ public class DbFigureType {
 
     @Column(name = "figure_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "figure_type_generator")
+    @SequenceGenerator(name="figure_type_generator", sequenceName = "tetris_figure_type")
+
     private int figureId;
 
-    @Column(name = "figure")
+    @Column(name = "figure_points")
     private String figure;
 
     @ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "figures")

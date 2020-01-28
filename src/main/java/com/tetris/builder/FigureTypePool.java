@@ -4,25 +4,14 @@ import com.tetris.database.repositories.impl.FigureTypeRepository;
 import com.tetris.game.Figure;
 import com.tetris.model.Point;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.*;
-import java.util.concurrent.atomic.AtomicInteger;
-
-import static com.tetris.database.ConnectionFactory.getConnection;
 
 class FigureTypePool {
-    static Map<Integer, Figure> figurePool;
+    static Map<Integer, Figure> figurePool = Collections.unmodifiableMap(fillMap());
     private FigureTypeRepository figureTypeRepository = new FigureTypeRepository();
 
-    FigureTypePool() {
-        figurePool = new HashMap<>();
-        fillMap();
-        figurePool = Collections.unmodifiableMap(figurePool);
-        //figureTypeRepository.fillJsonRepository(figurePool);
-    }
-    private void fillMap(){
+    private static Map<Integer, Figure> fillMap() {
+        Map<Integer, Figure> figurePool = new HashMap<>();
         List<Point> points0 = new ArrayList<>();
         List<Point> points1 = new ArrayList<>();
         List<Point> points2 = new ArrayList<>();
@@ -86,6 +75,8 @@ class FigureTypePool {
                 .pivot(new Point(1, 1))
                 .currentCoordinateOnBoard(new Point(0, 1))
                 .build());
+
+        return figurePool;
     }
 
     static Integer getFigureIdByFigure(Figure value) {
@@ -95,9 +86,9 @@ class FigureTypePool {
                 .findFirst().get();
     }
 
-    static Deque<Figure> getFiguresByType(Deque<Integer> types){
+    static Deque<Figure> getFiguresByType(Deque<Integer> types) {
         Deque<Figure> figures = new ArrayDeque<>();
-        types.forEach((k)-> figures.add(figurePool.get(k)));
+        types.forEach((k) -> figures.add(figurePool.get(k)));
         return figures;
     }
 }

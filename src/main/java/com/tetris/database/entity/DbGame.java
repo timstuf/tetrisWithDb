@@ -19,7 +19,8 @@ public class DbGame {
 
     @Column(name = "game_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_generator")
+    @SequenceGenerator(name="game_generator", sequenceName = "tetris_game")
     private int gameId;
 
     @Column(name = "game_status")

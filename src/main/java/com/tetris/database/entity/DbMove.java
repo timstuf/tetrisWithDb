@@ -19,14 +19,15 @@ public class DbMove {
 
     @Column(name = "move_id")
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "move_generator")
+    @SequenceGenerator(name="move_generator", sequenceName = "tetris_move")
     private int moveId;
 
     @Column(name = "move_name")
     @Enumerated(EnumType.STRING)
     private MoveEvent moveName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "game_id", nullable = false)
     private DbGame game;
 
