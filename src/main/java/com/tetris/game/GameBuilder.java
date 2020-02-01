@@ -5,6 +5,8 @@ import com.tetris.builder.FigureBuilderFactory;
 import com.tetris.database.repositories.hiberimpl.HiberGameRepository;
 import com.tetris.game.handler.db.DbMoveHandler;
 import com.tetris.game.handler.user.UserMoveHandler;
+import com.tetris.model.GameState;
+
 import java.util.Optional;
 
 public class GameBuilder {
@@ -24,12 +26,12 @@ public class GameBuilder {
 
     private static Game restoreGame(int id) {
         Board board = new Board(HEIGHT, WIDTH, new FigureBuilderFactory().getRestoreBuilder(id));
-        return new Game(new DbMoveHandler(new UserMoveHandler(id)), board, id);
+        return new Game(board, id, GameState.ACTIVE);
     }
 
     private static Game buildNewGame() {
         int gameId = gameRepository.createNewGame();
         Board board = new Board(HEIGHT, WIDTH, new FigureBuilderFactory().getClassicBuilder(gameId));
-        return new Game(new UserMoveHandler(gameId), board, gameId);
+        return new Game(board, gameId, GameState.ACTIVE);
     }
 }

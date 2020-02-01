@@ -1,8 +1,6 @@
 package com.tetris.database.repositories.impl;
 
 import com.tetris.database.ConnectionFactory;
-import com.tetris.database.entity.DbMove;
-import com.tetris.database.hibernate.repositories.Hiber;
 import com.tetris.database.repositories.Repository;
 import com.tetris.game.handler.MoveEvent;
 

@@ -3,7 +3,6 @@ package com.tetris.database.repositories.hiberimpl;
 import com.tetris.database.ConnectionFactory;
 import com.tetris.database.entity.DbGame;
 import com.tetris.database.entity.DbMove;
-import com.tetris.database.hibernate.repositories.Hiber;
 import com.tetris.database.repositories.Repository;
 import com.tetris.game.handler.MoveEvent;
 import lombok.extern.slf4j.Slf4j;
