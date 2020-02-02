@@ -18,7 +18,7 @@ public class UserMoveHandler extends MoveHandler {
     private final PlayerMoveEventPool moveEventPool = new PlayerMoveEventPool();
 
     public UserMoveHandler(Game game) {
-        this.tickThread = new Thread(new TickThread(game, false, false));
+        this.tickThread = new Thread(new TickThread(this, false, false));
         this.game = game;
     }
 
@@ -29,8 +29,11 @@ public class UserMoveHandler extends MoveHandler {
         String ev = scanner.nextLine();
         if(!tickThread.isAlive())tickThread.start();
         event = moveEventPool.pool.get(ev);
-        moveRepository.saveNewMoveEvent(game.getGameId(), event);
+        saveEvent(event);
         return event;
+    }
+    public void saveEvent(MoveEvent event){
+        moveRepository.saveNewMoveEvent(game.getGameId(), event);
     }
 
 

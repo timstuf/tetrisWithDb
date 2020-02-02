@@ -19,16 +19,16 @@ import static com.tetris.model.GameState.ACTIVE;
 public class Game {
     private final  Board board;
     private final int gameId;
-    private GameState state;
+    private volatile GameState state;
 
     public void start(){
         new DbMoveHandler(new UserMoveHandler(this), this).startGame();
         HiberGameRepository.finishGame(gameId);
     }
 
-    public void doMove(MoveEvent event){
+    public synchronized void  doMove(MoveEvent event){
         System.out.println(board.getStringState());
-        board.doGame(event);
+        state = board.doGame(event);
     }
     public void doMoveWithoutConsole(MoveEvent event){
         board.doGame(event);

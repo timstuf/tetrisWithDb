@@ -49,9 +49,11 @@ public class HiberGameRepository implements Repository {
     public static void finishGame(int gameId) {
         DbGame game = null;
         try (Session session = ConnectionFactory.sessionFactory.openSession()) {
+            session.beginTransaction();
             game = session.get(DbGame.class, gameId);
             game.setGameStatus(GameState.FINISHED);
             session.update(game);
+            session.getTransaction().commit();
         } catch (Exception e) {
             log.error(e.getMessage());
         }
